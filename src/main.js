@@ -10,6 +10,9 @@ import './css/skeleton.css';
 import bookIndex from './bookIndex.vue'
 import bookDetails from './bookDetails.vue'
 
+import publisherDetails from './publisherDetails.vue';
+import publisherIndex from './publisherIndex.vue';
+
 const routes = [
   { path: '/book', 
     component: bookIndex,
@@ -17,18 +20,21 @@ const routes = [
   { path: '/book/show/:id',
     component: bookDetails,
     props: {show: true}},
-  { path: '/book/edit/:id',
-    component: bookDetails,
-    props: {edit: true}},
-  { path: '/book/create',
-    component: bookDetails,
-    props: {create: true}},
-  { path: '/book/delete/:id',
-    component: bookDetails,
-    props: {delete: true}},
   { path: '/',
     component: bookIndex,
     props: true},
+
+    //publishers
+    { path: '/publisher', 
+      component: publisherIndex,
+      props: true},
+    { path: '/publisher/show/:id',
+      component: publisherDetails,
+      props: {show: true}},
+    // { path: '/',
+    //   component: publisherIndex,
+    //   props: true},
+
 ]
 
 const router = createRouter({
