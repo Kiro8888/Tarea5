@@ -20,18 +20,18 @@
         <div class="row">
           <div class="six columns">
             <label for="authorInput">Author</label>
-            <router-link :to="'/author/show/' + book.author.id" class="u-full-width">
-              {{ book.author.name }}
+            <router-link :to="'/author/show/' + book.author_id">
+              {{ book.author }}
             </router-link>
           </div>
           <div class="six columns">
             <label for="publisherInput">Publisher</label>
-            <router-link :to="'/publisher/show/' + book.publisher.id" class="u-full-width">
-              {{ book.publisher.name }}
+            <router-link :to="'/publisher/show/' + book.publisher_id">
+              {{ book.publisher }}
             </router-link>
           </div>
-          <router-link class="button button-primary" to="/book">Back</router-link>
         </div>
+        <router-link class="button button-primary" to="/book">Back</router-link>
       </form>
     </div>
   </div>
@@ -41,7 +41,6 @@
 import { useRoute } from 'vue-router';
 
 export default {
-  props: ['create', 'edit', 'show'],
   data() {
     return {
       title: "Book Data",
@@ -49,9 +48,11 @@ export default {
         title: '',
         edition: '',
         copyright: '',
-        author: { id: '', name: '' },
-        publisher: { id: '', name: '' }
-      },
+        author_id: null,
+        publisher_id: null,
+        author: '',
+        publisher: ''
+      }
     }
   },
   created() {
@@ -64,28 +65,23 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.book = result;
-        })
+          this.loadAuthor();
+          this.loadPublisher();
+        });
     },
-    updateBook() {
-      this.prof['_method'] = 'PUT';
-      const route = useRoute();
-      const id = route.params.id;
-      fetch(`/server/book/${id}`, {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify(this.book)
-      }).then(() => {
-        this.$router.push('/book');
-      })
+    loadAuthor() {
+      fetch(`/.netlify/functions/authors/${this.book.author_id}`, { headers: { 'Accept': 'application/json' } })
+        .then(response => response.json())
+        .then(author => {
+          this.book.author = author.name;
+        });
     },
-    createBook() {
-      fetch('/server/book', {
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-        body: JSON.stringify(this.book)
-      }).then(() => {
-        this.$router.push('/book');
-      })
+    loadPublisher() {
+      fetch(`/.netlify/functions/publishers/${this.book.publisher_id}`, { headers: { 'Accept': 'application/json' } })
+        .then(response => response.json())
+        .then(publisher => {
+          this.book.publisher = publisher.name;
+        });
     }
   }
 }

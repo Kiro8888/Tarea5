@@ -60,16 +60,10 @@ app.get('/', (req, res) => {
 });
 app.get('/:id', (req, res) => {
   let book = books.find(i => i.id == req.params.id);
-  if (book == undefined) {
+  if (book == undefined)
     res.status(404).send('Book not found');
-  } else {
-    // Suponiendo que cada libro tiene `authorId` y `publisherId`
-    let author = authors.find(a => a.id === book.authorId);
-    let publisher = publishers.find(p => p.id === book.publisherId);
-    book.author = author;
-    book.publisher = publisher;
+  else
     res.json(book);
-  }
 });
 
 exp.use(bodyParser.json());
