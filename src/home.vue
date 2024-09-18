@@ -5,9 +5,15 @@
         Dentro de la vista detalles de cada registro podremos navegar entre entidades
       </p>
       <ul>
-        <li><a href="/book">Books</a></li>
-        <li><a href="/author">Authors</a></li>
-        <li><a href="/publisher">Publishers</a></li>
+        <li>     <router-link 
+       style="margin-right: 10px;" to="/book">Books
+      </router-link> </li>
+        <li> <router-link 
+       style="margin-right: 10px;" to="/author">Authors
+      </router-link></li>
+        <li>      <router-link 
+       to="/publisher">Publishers
+      </router-link></li>
       </ul>
     </div>
   </template>
