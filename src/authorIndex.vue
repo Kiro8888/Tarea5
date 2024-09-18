@@ -35,7 +35,7 @@ export default {
         { headers: {'Accept': 'application/json'}})
         .then((response) => response.json())
         .then((result) => {
-          this.books = result;
+          this.authors = result;
         })
      },
   },
