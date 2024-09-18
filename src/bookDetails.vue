@@ -5,10 +5,10 @@
       <form>
         <div class="row">
           <!-- Mostrar imagen del libro -->
-          <div class="six columns">
+          <!-- <div class="six columns">
             <label for="bookImage">Cover Image</label>
             <img :src="book.image" alt="Book Cover" class="u-full-width" v-if="book.image">
-          </div>
+          </div> -->
           <!-- Información del libro -->
           <div class="six columns">
             <label for="titleInput">Title</label>
