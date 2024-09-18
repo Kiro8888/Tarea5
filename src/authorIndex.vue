@@ -2,19 +2,18 @@
 <template>
   <div class="row">
    <div style="margin-top: 5%">
-     <h2>{{title}}</h2>
+     <h2>{{name}}</h2>
      <table><thead>
-      <tr><th>Title</th><th>Edition</th><th>Copyright</th>
-          <th>Author</th><th>Publisher</th></tr>
+      <tr><th>Name</th><th>Nationality</th><th>Occupation</th>
+          <th>Pseudonym</th></tr>
       </thead><tbody>
-      <tr v-for='book in books'><td>{{book.title}}</td>
-      <td>{{book.edition}}</td>
-      <td>{{book.copyright}}</td>
-      <td>{{book.author}}</td>
-      <td>{{book.publisher}}</td>
+      <tr v-for='author in authors'><td>{{author.name}}</td>
+      <td>{{author.nationality}}</td>
+      <td>{{author.occupation}}</td>
+      <td>{{author.pseudonym}}</td>
       <td>
       <router-link class="button"
-        :to="'/book/show/'+book.id">Show</router-link>
+        :to="'/author/show/'+author.id">Show</router-link>
       </td>
       </tr></tbody>
      </table>
@@ -26,13 +25,13 @@
 export default {
   data() {
     return {
-      books: [],
-      title: 'BookList'
+      authors: [],
+      title: 'AuthorList'
     }
   },
   methods: {
-    allBook() {
-      fetch('/.netlify/functions/books',
+    allAuthor() {
+      fetch('/.netlify/functions/authors',
         { headers: {'Accept': 'application/json'}})
         .then((response) => response.json())
         .then((result) => {
@@ -41,7 +40,7 @@ export default {
      },
   },
   mounted() {
-    this.allBook()
+    this.allAuthor()
   }
 }
 </script>

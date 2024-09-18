@@ -34,10 +34,6 @@
       </div>
       <router-link class="button button-primary" 
         to="/book">Back</router-link>
-      <a v-if='edit' class="button button-primary" style="float: right"
-         v-on:click="updateBook()">Update</a>
-      <a v-if='create' class="button button-primary" style="float: right"
-         v-on:click="createBook()">Create</a>
      </div>
     </form>
    </div>
