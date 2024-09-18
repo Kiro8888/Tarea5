@@ -10,16 +10,18 @@ let authors =
     "name": "Abraham Silberschatz",
     "nationality": "American",
     "occupation": "Computer Scientist",
-    "pseudonym": "None"
+    "pseudonym": "None",
+    "book_ids": ["1", "2"]
   },
   {
     "id": 2,
     "name": "Andrew S. Tanenbaum",
     "nationality": "Dutch",
     "occupation": "Professor and Computer Scientist",
-    "pseudonym": "None"
+    "pseudonym": "None",
+    "book_ids": ["3", "4"]
   }
-];
+]
 
 
 const app = express.Router();

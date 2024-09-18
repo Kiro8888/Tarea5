@@ -1,65 +1,75 @@
-<!-- bookDetails.vue -->
 <template>
   <div class="row">
-   <div class="eleven column" style="margin-top: 5%">
-    <h2>{{name}}</h2>
-     <form>
-     <div class="row">
-      <div class="six columns">
-       <label for="titleInput">Name</label>
-       <input class="u-full-width" type="text"
-         v-model="author.name">
-      </div>
-      <div class="six columns">
-       <label for="editionInput">Nationality</label>
-       <input class="u-full-width" type="text"
-          v-model="author.nationality">
-      </div>
-      <div class="six columns">
-       <label for="copyrightInput">Occupation</label>
-       <input class="u-full-width" type="text"
-          v-model="author.occupation">
-      </div>
-     </div>
-     <div class="row">
-      <div class="six columns">
-       <label for="emailInput">Pseudonym</label>
-       <input class="u-full-width" type="email"
-          v-model="author.pseudonym">
-      </div>
-      <router-link class="button button-primary" 
-        to="/author">Back</router-link>
-     </div>
-    </form>
-   </div>
+    <div style="margin-top: 5%">
+      <h2>{{ author.name }}</h2>
+      <p><strong>Nationality:</strong> {{ author.nationality }}</p>
+      <p><strong>Occupation:</strong> {{ author.occupation }}</p>
+      <p><strong>Pseudonym:</strong> {{ author.pseudonym }}</p>
+
+      <h3>Books</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Edition</th>
+            <th>Copyright</th>
+            <th>Publisher</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="book in books" :key="book.id">
+            <td>{{ book.title }}</td>
+            <td>{{ book.edition }}</td>
+            <td>{{ book.copyright }}</td>
+            <td>{{ getPublisherName(book.publisher_id) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
-	
-import { useRoute } from 'vue-router'
-	
 export default {
-  props: ['show'],
-  data: function() {
+  data() {
     return {
-      title: "Author Data",
-      author: {'name':'','nationality':'','occupation':'','pseudonym':''},
+      author: {},
+      books: [],
+      publishers: []
     }
   },
-  created () {
-   const route = useRoute();  
-   this.findAuthor(route.params.id);
-  },
   methods: {
-    findAuthor: function(id) {
-      fetch('/.netlify/functions/authors/'+id,
-        { headers: {'Accept': 'application/json'}})
+    getAuthor() {
+      const authorId = this.$route.params.id;
+      fetch(`/.netlify/functions/authors/${authorId}`, { headers: { 'Accept': 'application/json' } })
         .then((response) => response.json())
         .then((result) => {
           this.author = result;
-        })
+          this.loadBooks();
+        });
     },
+    loadBooks() {
+      fetch('/.netlify/functions/books', { headers: { 'Accept': 'application/json' } })
+        .then((response) => response.json())
+        .then((result) => {
+          this.books = result.filter(book => this.author.book_ids.includes(book.id));
+        });
+    },
+    loadPublishers() {
+      fetch('/.netlify/functions/publishers', { headers: { 'Accept': 'application/json' } })
+        .then((response) => response.json())
+        .then((result) => {
+          this.publishers = result;
+        });
+    },
+    getPublisherName(publisherId) {
+      const publisher = this.publishers.find((p) => p.id === publisherId);
+      return publisher ? publisher.name : 'Unknown Publisher';
+    }
+  },
+  mounted() {
+    this.getAuthor();
+    this.loadPublishers();
   }
 }
 </script>

@@ -10,14 +10,16 @@ let publishers=
     "name": "John Wiley & Sons",
     "country": "United States",
     "founded": 1807,
-    "publisher_name": "John Wiley"
+    "publisher_name": "John Wiley",
+    "book_ids": ["1", "2"]
   },
   {
     "id": 2,
     "name": "Pearson Education",
     "country": "United Kingdom",
     "founded": 1844,
-    "publisher_name": "Samuel Pearson"
+    "publisher_name": "Samuel Pearson",
+    "book_ids": ["3", "4"]
   }
 ];
 
