@@ -1,30 +1,11 @@
 <template>
   <div class="row">
-    <div class="eleven column" style="margin-top: 5%">
+    <div style="margin-top: 5%">
       <h2>{{ publisher.name }}</h2>
-      <form>
-        <div class="row">
-          <div class="six columns">
-            <label for="nameInput">Name</label>
-            <input class="u-full-width" type="text" v-model="publisher.name" disabled>
-          </div>
-          <div class="six columns">
-            <label for="countryInput">Country</label>
-            <input class="u-full-width" type="text" v-model="publisher.country" disabled>
-          </div>
-          <div class="six columns">
-            <label for="foundedInput">Founded</label>
-            <input class="u-full-width" type="text" v-model="publisher.founded" disabled>
-          </div>
-          <div class="six columns">
-            <label for="publisherNameInput">Publisher Name</label>
-            <input class="u-full-width" type="text" v-model="publisher.publisher_name" disabled>
-          </div>
-        </div>
-        <div class="row">
-          <router-link class="button button-primary" to="/publisher">Back</router-link>
-        </div>
-      </form>
+      <p><strong>Country:</strong> {{ publisher.country }}</p>
+      <p><strong>Founded:</strong> {{ publisher.founded }}</p>
+      <p><strong>Publisher Name:</strong> {{ publisher.publisher_name }}</p>
+
       <h3>Books Published</h3>
       <table>
         <thead>
@@ -42,6 +23,15 @@
           </tr>
         </tbody>
       </table>
+
+      <h3>Authors</h3>
+      <ul>
+        <li v-for="author in publisher.authors" :key="author.id">
+          <router-link :to="'/authors/' + author.id">
+            {{ author.name }}
+          </router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -57,7 +47,8 @@ export default {
         country: '',
         founded: '',
         publisher_name: '',
-        books: []
+        books: [],
+        authors: []
       }
     }
   },
@@ -71,8 +62,28 @@ export default {
         .then(response => response.json())
         .then(result => {
           this.publisher = result;
-        })
+          this.loadBooks(result.book_ids);
+          this.loadAuthors(result.author_ids); // Asegúrate de que esta propiedad exista
+        });
+    },
+    loadBooks(bookIds) {
+      fetch('/.netlify/functions/books', { headers: { 'Accept': 'application/json' } })
+        .then(response => response.json())
+        .then(books => {
+          this.publisher.books = books.filter(book => bookIds.includes(book.id));
+        });
+    },
+    loadAuthors(authorIds) {
+      fetch('/.netlify/functions/authors', { headers: { 'Accept': 'application/json' } })
+        .then(response => response.json())
+        .then(authors => {
+          this.publisher.authors = authors.filter(author => authorIds.includes(author.id));
+        });
     }
   }
 }
 </script>
+
+<style scoped>
+/* Puedes agregar estilos aquí si es necesario */
+</style>

@@ -11,7 +11,8 @@ let publishers=
     "country": "United States",
     "founded": 1807,
     "publisher_name": "John Wiley",
-    "book_ids": ["1", "2"]
+    "book_ids": ["1", "2"],
+    "author_ids": ["1", "2"]
   },
   {
     "id": 2,
@@ -19,7 +20,8 @@ let publishers=
     "country": "United Kingdom",
     "founded": 1844,
     "publisher_name": "Samuel Pearson",
-    "book_ids": ["3", "4"]
+    "book_ids": ["3", "4"],
+    "author_ids": ["1", "2"]
   }
 ];
 

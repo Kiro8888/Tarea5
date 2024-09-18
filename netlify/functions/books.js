@@ -60,35 +60,18 @@ app.get('/', (req, res) => {
 });
 app.get('/:id', (req, res) => {
   let book = books.find(i => i.id == req.params.id);
-  if (book == undefined)
+  if (book == undefined) {
     res.status(404).send('Book not found');
-  else
+  } else {
+    // Suponiendo que cada libro tiene `authorId` y `publisherId`
+    let author = authors.find(a => a.id === book.authorId);
+    let publisher = publishers.find(p => p.id === book.publisherId);
+    book.author = author;
+    book.publisher = publisher;
     res.json(book);
-});
-app.post('/:id', (req, res) => {
-  let index = books.findIndex(i => i.id == req.params.id);
-  if (index != -1)
-    res.status(404).send('Book already exits'); 
-  else {
-    books.push(body);
   }
 });
-app.put('/', (req, res) => {
-  let index = books.findIndex(i => i.id == req.params.id);
-  if (index == -1)
-    res.status(404).send('Book not found');
-  else {
-    books[index] = body;
-  }
-});
-app.delete('/:id', (req, res) => {
-  let index = books.findIndex(i => i.id == req.params.id);
-  if (index == -1)
-    return resolve();
-  else {
-    books = books.filter(i => i.id != req.params.id);
-  }
-});
+
 exp.use(bodyParser.json());
 exp.use('/.netlify/functions/books', app);
 module.exports = exp;
