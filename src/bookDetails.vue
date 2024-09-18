@@ -4,6 +4,12 @@
       <h2>{{ title }}</h2>
       <form>
         <div class="row">
+          <!-- Mostrar imagen del libro -->
+          <div class="six columns">
+            <label for="bookImage">Cover Image</label>
+            <img :src="book.image" alt="Book Cover" class="u-full-width" v-if="book.image">
+          </div>
+          <!-- Información del libro -->
           <div class="six columns">
             <label for="titleInput">Title</label>
             <input class="u-full-width" type="text" v-model="book.title" disabled>
@@ -51,7 +57,8 @@ export default {
         author_id: null,
         publisher_id: null,
         author: '',
-        publisher: ''
+        publisher: '',
+        image: '' // Nuevo campo para la imagen
       }
     }
   },

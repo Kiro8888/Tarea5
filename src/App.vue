@@ -3,6 +3,9 @@
   <div id="app" class="container">
     <div class="row" style="margin-top: 5%">
       <router-link class="button button-primary" 
+       style="margin-right: 10px;" to="/">Home
+      </router-link> 
+      <router-link class="button button-primary" 
        style="margin-right: 10px;" to="/book">Books
       </router-link> 
       <router-link class="button button-primary" 

@@ -14,7 +14,8 @@ let books = [
     "author": "Abraham Silberschatz",
     "author_id": 1,
     "publisher": "John Wiley & Sons",
-    "publisher_id": 1
+    "publisher_id": 1,
+    "image": "/src/image/books/Operating_System_Concepts.jpg" 
   },
   {
     "id": "2",
@@ -26,7 +27,8 @@ let books = [
     "author": "Abraham Silberschatz",
     "author_id": 1,
     "publisher": "John Wiley & Sons",
-    "publisher_id": 1
+    "publisher_id": 1,
+    "image": "/src/image/books/Database_System_Concepts.jpg" 
   },
   {
     "id": "3",
@@ -38,7 +40,8 @@ let books = [
     "author": "Andrew S. Tanenbaum",
     "author_id": 2,
     "publisher": "Pearson Education",
-    "publisher_id": 2
+    "publisher_id": 2,
+    "image": "/src/image/books/Computer_Networks.jpg" 
   },
   {
     "id": "4",
@@ -50,7 +53,8 @@ let books = [
     "author": "Andrew S. Tanenbaum",
     "author_id": 2,
     "publisher": "Pearson Education",
-    "publisher_id": 2
+    "publisher_id": 2,
+    "image": "/src/image/books/Modern_Operating_Systems.jpg" 
   },
   {
     "id": "5",
@@ -62,7 +66,8 @@ let books = [
     "author": "Donald Knuth",
     "author_id": 3,
     "publisher": "Addison-Wesley",
-    "publisher_id": 3
+    "publisher_id": 3,
+    "image": "/src/image/books/The_Art_Programming.jpg" 
   },
   {
     "id": "6",
@@ -74,7 +79,8 @@ let books = [
     "author": "Donald Knuth",
     "author_id": 3,
     "publisher": "Addison-Wesley",
-    "publisher_id": 3
+    "publisher_id": 3,
+    "image": "/src/image/books/Concrete_Mathematics.jpg" 
   },
   {
     "id": "7",
@@ -86,7 +92,8 @@ let books = [
     "author": "Robert C. Martin",
     "author_id": 4,
     "publisher": "Prentice Hall",
-    "publisher_id": 4
+    "publisher_id": 4,
+    "image": "/src/image/books/Clean_Code.jpg" 
   },
   {
     "id": "8",
@@ -98,7 +105,8 @@ let books = [
     "author": "Robert C. Martin",
     "author_id": 4,
     "publisher": "Prentice Hall",
-    "publisher_id": 4
+    "publisher_id": 4,
+    "image": "/src/image/books/The_Clean_Coder.jpg" 
   }
 ];
 

@@ -16,6 +16,8 @@ import publisherIndex from './publisherIndex.vue';
 import authorIndex from './authorIndex.vue';
 import authorDetails from './authorDetails.vue';
 
+import home from './home.vue';
+
 const routes = [
   { path: '/book', 
     component: bookIndex,
@@ -24,7 +26,7 @@ const routes = [
     component: bookDetails,
     props: {show: true}},
   { path: '/',
-    component: bookIndex,
+    component: home,
     props: true},
 
     //publishers
